@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from rest_framework import status, views
 
-# Create your views here.
+
+class ProductStatisticsView(views.APIView):
+    pass
+

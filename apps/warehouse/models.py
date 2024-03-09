@@ -25,8 +25,8 @@ class ProductMaterial(models.Model):
         METER_SQUARE = "MTSQ", "Meter Square"
         PIECE = "PC", "Piece"
 
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
-    material_id = models.ForeignKey(Material, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='material')
+    material = models.ForeignKey(Material, on_delete=models.SET_NULL, null=True, related_name='product')
     quantity = models.CharField(max_length=16, blank=True)
     quantity_type = models.CharField(max_length=32, choices=QuantityType.choices, default=QuantityType.PIECE)
 
@@ -39,7 +39,7 @@ class ProductMaterial(models.Model):
 
 
 class Warehouse(models.Model):
-    material_id = models.ForeignKey(Material, on_delete=models.SET_NULL, null=True)
+    material = models.ForeignKey(Material, on_delete=models.SET_NULL, null=True, related_name='warehouse')
     remainder = models.IntegerField()
     price = models.IntegerField()
 
