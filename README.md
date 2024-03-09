@@ -18,7 +18,7 @@ edit .env file and add your own credentials
 ### Upload initial data
 ```
 python manage.py migrate
-make loaddata
+python loaddata
 ```
 
 ### Run project
