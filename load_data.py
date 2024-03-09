@@ -24,7 +24,7 @@ def insert_warehouse_material():
     # delete all rows from the warehouse_material table and reset id
     cursor.execute("TRUNCATE TABLE warehouse_material RESTART IDENTITY CASCADE")
     # insert new rows into warehouse_material table
-    postgres_insert_query = """ INSERT INTO warehouse_material (title)  VALUES (%s)"""
+    postgres_insert_query = """INSERT INTO warehouse_material (title)  VALUES (%s)"""
     records_to_insert = ['Mato', 'Ip', 'Tugma', 'Zamok']
     for record in records_to_insert:
         cursor.execute(postgres_insert_query, (record,))
@@ -37,7 +37,7 @@ def insert_warehouse_product():
     cursor.execute("ALTER TABLE warehouse_product ALTER COLUMN guid TYPE uuid")
     cursor.execute("ALTER TABLE warehouse_product ALTER COLUMN guid SET DEFAULT gen_random_uuid()")
     # insert new rows into warehouse_product table
-    postgres_insert_query = """ INSERT INTO warehouse_product (title)  VALUES (%s)"""
+    postgres_insert_query = """INSERT INTO warehouse_product (title)  VALUES (%s)"""
     records_to_insert = ['Koylak', 'Shim']
     for record in records_to_insert:
         cursor.execute(postgres_insert_query, (record,))
@@ -47,7 +47,7 @@ def insert_warehouse_productmaterial():
     # delete all rows from the warehouse_product_material table and reset id
     cursor.execute("TRUNCATE TABLE warehouse_productmaterial RESTART IDENTITY")
     # insert new rows into warehouse_product_material table
-    postgres_insert_query = """ INSERT INTO warehouse_productmaterial (quantity, material_id_id, product_id_id, quantity_type)  VALUES (%s, %s, %s, %s)"""
+    postgres_insert_query = """INSERT INTO warehouse_productmaterial (quantity, material_id_id, product_id_id, quantity_type)  VALUES (%s, %s, %s, %s)"""
     cursor.execute(postgres_insert_query, ('0.8', 1, 1, 'MTSQ'))
     cursor.execute(postgres_insert_query, ('5', 3, 1, 'PC'))
     cursor.execute(postgres_insert_query, ('10', 2, 1, 'MT'))
@@ -60,7 +60,7 @@ def insert_warehouse_warehouse():
     # delete all rows from the warehouse_warehouse table and reset id
     cursor.execute("TRUNCATE TABLE warehouse_warehouse RESTART IDENTITY")
     # insert new rows into warehouse_warehouse table
-    postgres_insert_query = """ INSERT INTO warehouse_warehouse (remainder, price, material_id_id)  VALUES (%s, %s, %s)"""
+    postgres_insert_query = """INSERT INTO warehouse_warehouse (remainder, price, material_id_id)  VALUES (%s, %s, %s)"""
     cursor.execute(postgres_insert_query, (12, 1500, 1))
     cursor.execute(postgres_insert_query, (200, 1600, 1))
     cursor.execute(postgres_insert_query, (40, 500, 2))
