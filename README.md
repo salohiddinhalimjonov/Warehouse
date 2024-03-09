@@ -18,7 +18,9 @@ edit .env file and add your own credentials
 ### Upload initial data
 ```
 python manage.py migrate
-python load_data.py
+python load_data.py  
+For loading the data, run python script above or connect to the project database and run 
+sql commands in warehouse.sql file
 ```
 
 ### Run project
