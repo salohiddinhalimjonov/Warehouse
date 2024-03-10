@@ -35,4 +35,4 @@ http://127.0.0.1:8000/api/v1/warehouse/statistics/
 
 ### Expected Result
 
-![result.png](..%2F..%2FPictures%2Fresult.png)
+![result](https://github.com/salohiddinhalimjonov/Warehouse/assets/72136403/49d24726-49da-4b6d-8137-5ef6c056dca1)
