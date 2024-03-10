@@ -1,5 +1,6 @@
 from django.urls import path, include
+from apps.warehouse.views import ProductStatisticsView
 
 urlpatterns = [
-    #path(''),
+    path('statistics/', ProductStatisticsView.as_view()),
 ]

@@ -44,5 +44,4 @@ class Warehouse(models.Model):
     price = models.IntegerField()
 
 
-
-
+__all__ = ['Material', 'Product', 'ProductMaterial', 'Warehouse']

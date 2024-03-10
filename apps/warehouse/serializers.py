@@ -1,9 +1,55 @@
 from rest_framework import serializers
-from apps.warehouse.models import Product, Warehouse, ProductMaterial
+from apps.warehouse.models import Product, Warehouse, ProductMaterial, Material
 
+
+class WarehouseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Warehouse
+        fields = [
+            'id',
+            'remainder',
+            'price'
+        ]
+
+class WarehouseIDSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Warehouse
+        fields = [
+            'id',
+        ]
+
+class MaterialSerializer(serializers.ModelSerializer):
+    warehouses = WarehouseSerializer(many=True, read_only=True)
+    class Meta:
+        model = Material
+        fields = [
+            'title',
+            'warehouses'
+        ]
+
+
+
+class ProductMaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductMaterial
+        fields = [
+            'id',
+            'product',
+            'material',
+            'quantity'
+        ]
+
+    def to_representation(self, instance):
+        product_qty = self.context.get('product_qty')
+        representation = super().to_representation(instance)
+        if isinstance(instance.quantity, int):
+            representation['quantity'] = product_qty * int(instance.quantity)
+        else:
+            representation['quantity'] = product_qty * float(instance.quantity)
+        return representation
 
 class ProductCountSerializer(serializers.Serializer):
-    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), error_messages={'does_not_exist': 'Invalid product id'}))
+    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), error_messages={'does_not_exist': 'Invalid product id'})
     product_qty = serializers.IntegerField()
 
 
@@ -23,7 +69,6 @@ class ProductStatisticsSerializer(serializers.ModelSerializer):
         return self.context.get('product_qty')
 
     def get_product_materials(self, obj):
-        product_qty = self.context.get('product_qty')
-        materials = obj.material.all()
-        material_warehouses = [material.warehouse.all() for material in materials]
+        return self.context.get('product_materials')
 
+__all__ = ['MaterialSerializer', 'WarehouseIDSerializer', 'WarehouseSerializer', 'ProductMaterialSerializer', 'ProductCountSerializer', 'ProductStatisticsSerializer']
