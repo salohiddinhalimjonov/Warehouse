@@ -27,3 +27,12 @@ python load_data.py
 ```
 python manage.py runserver
 ```
+
+### Run API
+```
+http://127.0.0.1:8000/api/v1/warehouse/statistics/
+```
+
+### Expected Result
+
+![result.png](..%2F..%2FPictures%2Fresult.png)

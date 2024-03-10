@@ -11,22 +11,13 @@ class WarehouseSerializer(serializers.ModelSerializer):
             'price'
         ]
 
+
 class WarehouseIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Warehouse
         fields = [
             'id',
         ]
-
-class MaterialSerializer(serializers.ModelSerializer):
-    warehouses = WarehouseSerializer(many=True, read_only=True)
-    class Meta:
-        model = Material
-        fields = [
-            'title',
-            'warehouses'
-        ]
-
 
 
 class ProductMaterialSerializer(serializers.ModelSerializer):
@@ -45,7 +36,7 @@ class ProductMaterialSerializer(serializers.ModelSerializer):
         if isinstance(instance.quantity, int):
             representation['quantity'] = product_qty * int(instance.quantity)
         else:
-            representation['quantity'] = product_qty * float(instance.quantity)
+            representation['quantity'] = int(product_qty * float(instance.quantity))
         return representation
 
 class ProductCountSerializer(serializers.Serializer):
@@ -71,4 +62,5 @@ class ProductStatisticsSerializer(serializers.ModelSerializer):
     def get_product_materials(self, obj):
         return self.context.get('product_materials')
 
-__all__ = ['MaterialSerializer', 'WarehouseIDSerializer', 'WarehouseSerializer', 'ProductMaterialSerializer', 'ProductCountSerializer', 'ProductStatisticsSerializer']
+
+__all__ = ['WarehouseIDSerializer', 'WarehouseSerializer', 'ProductMaterialSerializer', 'ProductCountSerializer', 'ProductStatisticsSerializer']
