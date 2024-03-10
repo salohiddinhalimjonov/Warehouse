@@ -1,4 +1,5 @@
 from rest_framework import serializers
+#Project
 from apps.warehouse.models import Product, Warehouse, ProductMaterial, Material
 
 
@@ -29,7 +30,7 @@ class ProductMaterialSerializer(serializers.ModelSerializer):
             'material',
             'quantity'
         ]
-
+    # return quantity multiplied by the number of products(product_qty) that shall be manufactured
     def to_representation(self, instance):
         product_qty = self.context.get('product_qty')
         representation = super().to_representation(instance)

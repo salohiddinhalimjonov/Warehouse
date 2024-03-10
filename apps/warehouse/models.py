@@ -18,7 +18,7 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-
+# Add units of measure (Meter, MeterSquare), Quantity may recieve decimal or integer value, so, use Char Field for numerical value
 class ProductMaterial(models.Model):
     class QuantityType(models.TextChoices):
         METER = "MT", "Meter",
